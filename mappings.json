@@ -1,0 +1,30 @@
+{
+  "mappings": {
+    "properties": {
+      "modified": {
+        "type": "date",
+        "format": "yyyy-MM-dd HH:mm:ss||strict_date_optional_time ||epoch_millis"
+      },
+      "dateFrom": {
+        "type": "date"
+      },
+      "dateTo": {
+        "type": "date"
+      },
+      "accusition": {
+        "type": "date"
+      },
+      "history": {
+        "properties": {
+          "places": {
+            "properties": {
+              "location": {
+                "type": "geo_point"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
