@@ -11,7 +11,7 @@ if (process.argv.length < 3) {
 let indexName = argv.index;
 
 let client = new elasticsearch.Client({
-	host: argv.url || 'localhost:9200'
+	host: argv.url || 'localhost:9200',
 });
 
 let body = {};

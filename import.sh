@@ -1,11 +1,13 @@
-#./getXmlFiles.sh
+source auth.env
+
+./getXmlFiles.sh
 #sudo apt install git-restore-mtime
 cd Manuscripts
-#git restore-mtime
+git restore-mtime
 cd ..
 python parse.py > manuscripts.json
-curl -XDELETE http://localhost:9200/handrit
-node createIndex.js --url=localhost:9200 --index=handrit --mappings="{
+curl -XDELETE http://localhost:9201/handrit -u elastic:${ES_PASS}
+node createIndex.js --url=elastic:${ES_PASS}@localhost:9201 --index=handrit --mappings="{
 	\"properties\": {
 		\"modified\": {
 			\"type\": \"date\",
@@ -33,4 +35,4 @@ node createIndex.js --url=localhost:9200 --index=handrit --mappings="{
 		}
 	}
 }"
-node esImportJson.js --url http://localhost:9200 --fileName manuscripts.json --indexName handrit
+node esImportJson.js --url http://elastic:${ES_PASS}@localhost:9201 --fileName manuscripts.json --indexName handrit
