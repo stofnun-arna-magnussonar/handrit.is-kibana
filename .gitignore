@@ -1,5 +1,6 @@
 Manuscripts/
 manuscripts.json
+ismus.json
 node_modules
 auth.env
 docker-elk/passdw

@@ -49,7 +49,7 @@ def getMsItemData(msItem):
 
 		msItemData['author'] = {
 			'id': authorEl.get('key'),
-			'name': authorEl.get_text()
+			'name': authorEl.get_text()+(' ('+authorEl.get('key')+')' if authorEl.get('key') is not None else '')
 		}
 	
 	if len([c for c in msItem.findChildren('name') if c.get('type') == 'person' and c.get('key') is not None]) > 0:
@@ -124,6 +124,7 @@ for file in files:
 		msDescEl = s.find('msDesc');
 
 		if msDescEl is not None:
+			msData['url'] = 'https://handrit.is/manuscript/view/'+msDescEl.get('xml:lang')+'/'+'-'.join(msDescEl.get('xml:id').split('-')[:-1])
 			if msDescEl.find('physDesc') is not None:
 				physDescEl = msDescEl.find('physDesc')
 
@@ -232,6 +233,9 @@ for file in files:
 					
 					msData['items'].append(msItemData)
 			
+			if s.find('facsimile') and len(s.find('facsimile').findChildren('graphic')) > 0:
+				msData['images'] = True
+
 			manuscripts.append(msData)
 
 			#print(json.dumps(msData, indent=4, ensure_ascii=False))

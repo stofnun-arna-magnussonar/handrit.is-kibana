@@ -48,7 +48,7 @@ let pageSize = argv.pageSize || 50;
 
 let client = new elasticsearch.Client({
 	host: argv.url || 'localhost:9200',
-	//log: 'trace'
+	log: 'trace'
 });
 
 fs.readFile(argv.fileName, function(error, data) {
